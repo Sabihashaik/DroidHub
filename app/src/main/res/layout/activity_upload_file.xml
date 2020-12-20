@@ -7,7 +7,7 @@
     tools:context=".UploadFileActivity">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/yourFilesTextView"
         style="@style/TextAppearance.AppCompat.Title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -34,7 +34,7 @@
         android:hint="File name goes here"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView">
+        app:layout_constraintTop_toBottomOf="@+id/yourFilesTextView">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
