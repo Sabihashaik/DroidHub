@@ -36,6 +36,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/loginEmailField"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:textSize="20sp" />
@@ -55,6 +56,7 @@
         app:passwordToggleEnabled="true">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/loginPasswordField"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:textSize="20sp" />
