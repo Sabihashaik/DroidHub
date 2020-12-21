@@ -8,6 +8,8 @@ import android.provider.MediaStore
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
@@ -25,6 +27,7 @@ class UploadFileActivity : AppCompatActivity() {
     lateinit var binding: ActivityUploadFileBinding
     var filePath: Uri? = null
     private var mStorageRef: StorageReference? = null
+    private lateinit var db: FirebaseFirestore
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
@@ -40,6 +43,7 @@ class UploadFileActivity : AppCompatActivity() {
 
         mStorageRef = Firebase.storage.getReference();
         binding = ActivityUploadFileBinding.inflate(layoutInflater)
+        db = Firebase.firestore
 
         binding.fileChooseButton.setOnClickListener{
            fileChooser()
@@ -53,20 +57,21 @@ class UploadFileActivity : AppCompatActivity() {
     }
 
     private fun fileChooser() {
-        var intent = Intent()
+        val intent = Intent()
         intent.type = "image/*"
         intent.action=Intent.ACTION_GET_CONTENT
         startActivityForResult(Intent.createChooser(intent, "Select an Image File"), PICK_IMAGE_CODE)
     }
 
     private fun uploadFile() {
-        var fileName = binding.fileNameField.text.toString()
+        val fileName = binding.fileNameField.text.toString()
         val myFileRef = mStorageRef?.child("images/"+fileName)
-        var uploadTask = filePath?.let { myFileRef?.putFile(it) }
+        val uploadTask = filePath?.let { myFileRef?.putFile(it) }
 
         uploadTask?.addOnFailureListener {
             Toast.makeText(this, "Task Failed"+it, Toast.LENGTH_SHORT).show()
          }?.addOnSuccessListener { taskSnapshot ->
+
             Toast.makeText(this, "Task Succeeded"+taskSnapshot, Toast.LENGTH_SHORT).show()
         }
 
