@@ -25,7 +25,7 @@
 
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/emailInputLayout"
+        android:id="@+id/fileInputLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -55,7 +55,7 @@
         app:backgroundTint="@color/button_color"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/emailInputLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/fileInputLayout" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/fileUploadButton"
@@ -73,5 +73,26 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/fileChooseButton"
         app:layout_constraintVertical_bias="0.0" />
+
+
+    <TextView
+        android:id="@+id/FilePathText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="26dp"
+        android:layout_marginEnd="8dp"
+        android:text="File Path:"
+        android:textAllCaps="false"
+        android:textSize="20sp"
+        app:backgroundTint="@color/button_color"
+        app:layout_constraintBottom_toTopOf="@id/fileUploadButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fileChooseButton"
+        app:layout_constraintVertical_bias="0.0" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
