@@ -13,6 +13,7 @@ import androidx.navigation.findNavController
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.SetOptions
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.sabihashaik.droidhub.databinding.FragmentSignupBinding
@@ -21,7 +22,7 @@ class SignupFragment : Fragment() {
    lateinit var binding: FragmentSignupBinding
    private lateinit var auth: FirebaseAuth
    private lateinit var db: FirebaseFirestore
-   private lateinit var user:HashMap<String,String>
+
 
 
     override fun onCreateView(
@@ -44,7 +45,6 @@ class SignupFragment : Fragment() {
             var password =  binding.passwordInputField.text.toString()
 
             createNewUser(name,email,password)
-
         }
         return binding.root
 
@@ -61,7 +61,8 @@ class SignupFragment : Fragment() {
                     )
                     addUsertoDB(user)
                     Toast.makeText(this.context, "new User Created", Toast.LENGTH_SHORT).show()
-                    startFileIntent()
+                    val filesIntent = Intent(context,FilesActivity::class.java)
+                    startActivity(filesIntent)
 
                  } else {
                     // If sign in fails, display a message to the user.
@@ -74,21 +75,18 @@ class SignupFragment : Fragment() {
     }
 
     private fun addUsertoDB(user:HashMap<String,String>) {
-        db.collection("users")
-            .add(user)
+        val userId = auth.uid.toString()
+        db.collection("users").document(userId)
+            .set(user, SetOptions.merge())
             .addOnSuccessListener { documentReference ->
-                Log.d("DroidHub", "DocumentSnapshot added with ID: ${documentReference.id}")
+               Log.d("DroidHub", "Success Pushed to Firestore")
             }
             .addOnFailureListener { e ->
                 Log.w("DroidHub", "Error adding document", e)
             }
     }
 
-    private fun startFileIntent() {
 
-        val filesIntent = Intent(context,FilesActivity::class.java)
-        startActivity(filesIntent)
-    }
 
 
 }
