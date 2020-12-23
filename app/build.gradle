@@ -63,10 +63,13 @@ dependencies {
     implementation 'com.google.firebase:firebase-storage-ktx'
     implementation 'com.google.firebase:firebase-firestore-ktx'
 
-
+    //Firebase UI
+    implementation 'com.firebaseui:firebase-ui-firestore:6.2.1'
 
 
     // Add GMS
     apply plugin: 'com.google.gms.google-services'
+    apply plugin: 'kotlin-android-extensions'
+
 
 }

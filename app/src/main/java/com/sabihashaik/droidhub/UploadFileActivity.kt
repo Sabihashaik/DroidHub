@@ -92,9 +92,8 @@ class UploadFileActivity : AppCompatActivity() {
         Log.d("DroidHub", "Entered Adding Item to Firestore")
         val userId = auth.uid.toString()
         //content://com.android.providers.media.documents/document/image%3A63996
-        var downloadUri2 = downloadUri.toString()
         var docs = hashMapOf(
-                "downloadURL" to downloadUri2,
+                "downloadURL" to downloadUri,
                 "filename" to fileName
         )
         //val collectionPath = "users/"+userId+"/documents"
