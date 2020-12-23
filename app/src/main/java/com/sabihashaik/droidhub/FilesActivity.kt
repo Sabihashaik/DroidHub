@@ -38,19 +38,17 @@ class FilesActivity : AppCompatActivity() {
     private fun setUpRecyclerView() {
         val userId = auth.uid.toString()
 
-        val query: Query = FirebaseFirestore.getInstance()
+
+        val query= FirebaseFirestore.getInstance()
             .collection("users")
             .document(userId)
             .collection("documents")
-            .orderBy("timestamp")
-            .limit(10)
-        Log.d("DroidHub","my query is:"+query)
+
         val options: FirestoreRecyclerOptions<fileItem> = FirestoreRecyclerOptions.Builder<fileItem>()
             .setQuery(query, fileItem::class.java)
             .build()
 
         fileListAdapter = FileListAdapter(options)
-
         fileRecylerView.layoutManager = LinearLayoutManager(this)
         fileRecylerView.adapter = fileListAdapter
     }
@@ -64,4 +62,10 @@ class FilesActivity : AppCompatActivity() {
         super.onDestroy()
         fileListAdapter!!.stopListening()
     }
+    override fun onStop() {
+        super.onStop()
+        fileListAdapter!!.stopListening()
+    }
+
+
 }
