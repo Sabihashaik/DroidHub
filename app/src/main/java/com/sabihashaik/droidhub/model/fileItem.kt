@@ -5,5 +5,4 @@ class fileItem{
         var filename:String?=null
         var downloadURL: String?=null
 
-    constructor()
 }

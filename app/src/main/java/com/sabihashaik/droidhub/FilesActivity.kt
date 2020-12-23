@@ -3,6 +3,7 @@ package com.sabihashaik.droidhub
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
@@ -12,14 +13,18 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.StorageReference
 import com.sabihashaik.droidhub.adapter.FileListAdapter
+import com.sabihashaik.droidhub.adapter.FileListAdapter.OnItemClickListener
 import com.sabihashaik.droidhub.model.fileItem
 import kotlinx.android.synthetic.main.content_files.*
+import java.io.File
 
 
-class FilesActivity : AppCompatActivity() {
+class FilesActivity : AppCompatActivity(), OnItemClickListener {
     private lateinit var auth: FirebaseAuth
-
+    private var storageRef: StorageReference? = null
+    private lateinit var db: FirebaseFirestore
     var fileListAdapter: FileListAdapter?=null
 
 
@@ -48,7 +53,7 @@ class FilesActivity : AppCompatActivity() {
             .setQuery(query, fileItem::class.java)
             .build()
 
-        fileListAdapter = FileListAdapter(options)
+        fileListAdapter = FileListAdapter(this,options)
         fileRecylerView.layoutManager = LinearLayoutManager(this)
         fileRecylerView.adapter = fileListAdapter
     }
@@ -67,5 +72,7 @@ class FilesActivity : AppCompatActivity() {
         fileListAdapter!!.stopListening()
     }
 
-
+    override fun onItemClick(position: Int) {
+        Toast.makeText(this, "Downloading.. File:"+position, Toast.LENGTH_SHORT).show()
+    }
 }
