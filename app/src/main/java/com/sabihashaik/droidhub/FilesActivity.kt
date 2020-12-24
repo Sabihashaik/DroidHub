@@ -12,6 +12,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
+import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.StorageReference
 import com.sabihashaik.droidhub.adapter.FileListAdapter
@@ -26,12 +27,16 @@ class FilesActivity : AppCompatActivity(), OnItemClickListener {
     private var storageRef: StorageReference? = null
     private lateinit var db: FirebaseFirestore
     var fileListAdapter: FileListAdapter?=null
+    private lateinit var userId:String
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_files)
         auth = Firebase.auth
+        userId = auth.uid.toString()
+
         setUpRecyclerView()
         findViewById<FloatingActionButton>(R.id.fab).setOnClickListener {
             val uploadFileIntent = Intent(this, UploadFileActivity::class.java)
@@ -41,7 +46,6 @@ class FilesActivity : AppCompatActivity(), OnItemClickListener {
     }
 
     private fun setUpRecyclerView() {
-        val userId = auth.uid.toString()
 
 
         val query= FirebaseFirestore.getInstance()
@@ -74,5 +78,29 @@ class FilesActivity : AppCompatActivity(), OnItemClickListener {
 
     override fun onItemClick(position: Int) {
         Toast.makeText(this, "Downloading.. File:"+position, Toast.LENGTH_SHORT).show()
+    /*
+        try {
+
+            FirebaseFirestore.getInstance().collection("users")
+                    .document(userId)
+                    .collection("documents")
+                    .get()
+                    .addOnSuccessListener { documents ->
+
+                        //for ( i in documents){
+                        Log.d("DroidHub", "" + documents.documents[position])
+                        //}
+                    }
+        }
+        catch (e:Exception){
+            Log.d("DroidHub","Error is "+e)
+        }
+
+        for(document in documents){
+            val fileDetail:Intent = Intent(this, FileDetailActivity::class.java)
+            fileDetail.putExtra("fileName",document[position].fileName)
+            fileDetail.putExtra("downloadURL",document[position].downloadURL)
+            startActivity(fileDetail)
+        }*/
     }
 }

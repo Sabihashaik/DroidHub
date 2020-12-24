@@ -2,9 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.sabihashaik.droidhub">
 
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -12,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.DroidHub">
-        <activity android:name=".UploadFileActivity"></activity>
+        <activity android:name=".FileDetailActivity"></activity>
+        <activity android:name=".UploadFileActivity" />
         <activity
             android:name=".FilesActivity"
             android:label="@string/title_activity_files"
@@ -28,5 +26,8 @@
         </activity>
         <activity android:name=".EnterActivity" />
     </application>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>
