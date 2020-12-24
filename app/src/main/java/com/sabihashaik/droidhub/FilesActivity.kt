@@ -77,7 +77,6 @@ class FilesActivity : AppCompatActivity(), OnItemClickListener {
     }
 
     override fun onItemClick(position: Int) {
-        Toast.makeText(this, "Opening File for Viewing..."+position, Toast.LENGTH_SHORT).show()
 
     }
 }
