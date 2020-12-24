@@ -77,30 +77,7 @@ class FilesActivity : AppCompatActivity(), OnItemClickListener {
     }
 
     override fun onItemClick(position: Int) {
-        Toast.makeText(this, "Downloading.. File:"+position, Toast.LENGTH_SHORT).show()
-    /*
-        try {
+        Toast.makeText(this, "Opening File for Viewing..."+position, Toast.LENGTH_SHORT).show()
 
-            FirebaseFirestore.getInstance().collection("users")
-                    .document(userId)
-                    .collection("documents")
-                    .get()
-                    .addOnSuccessListener { documents ->
-
-                        //for ( i in documents){
-                        Log.d("DroidHub", "" + documents.documents[position])
-                        //}
-                    }
-        }
-        catch (e:Exception){
-            Log.d("DroidHub","Error is "+e)
-        }
-
-        for(document in documents){
-            val fileDetail:Intent = Intent(this, FileDetailActivity::class.java)
-            fileDetail.putExtra("fileName",document[position].fileName)
-            fileDetail.putExtra("downloadURL",document[position].downloadURL)
-            startActivity(fileDetail)
-        }*/
     }
 }
